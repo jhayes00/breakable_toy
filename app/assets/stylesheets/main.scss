@@ -1,0 +1,31 @@
+$dark-gray: #2C302E;
+$med-gray: #474A48;
+$light-gray: #909590;
+$light-green: #9AE19D;
+$dark-green: #537A5A;
+
+@import url('https://fonts.googleapis.com/css2?family=Merienda+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap');
+
+.top-bar {
+  background-color: $light-green;
+}
+
+.logo-text {
+  // h1 {
+  //   line-height: 1;
+  //   margin-top: 1rem;
+  //   margin-bottom: 0.5rem;
+  // }
+  //
+  a {
+    color: $med-gray;
+    font-family: "Merienda One";
+    // font-family: "Cabin Sketch";
+
+    // &:hover {
+    //   text-decoration: none;
+    //   color: $yellow
+    // }
+  }
+}
