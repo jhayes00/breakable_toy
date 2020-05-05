@@ -8,7 +8,6 @@ const RecipesIndexContainer = props => {
   useEffect(() => {
     fetch('/api/v1/recipes.json')
     .then(response => {
-      debugger
       if (response.ok) {
         return response
       } else {
@@ -25,7 +24,11 @@ const RecipesIndexContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  let recipeTiles = recipes.map((recipe) => {
+  let sorted_recipes = recipes.sort(function(a,b) {
+    return a.missedIngredientCount - b.missedIngredientCount
+  })
+  
+  let recipeTiles = sorted_recipes.map((recipe) => {
     return(
       <RecipeTile
         key={recipe.id}
