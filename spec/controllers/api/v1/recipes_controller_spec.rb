@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::RecipesController, type: :controller do
-  describe "GET#index" do
+  xdescribe "GET#index" do
     # let!(:pantry_item1) { FactoryBot.create(:pantry_item) }
     # let!(:pantry_item2) { FactoryBot.create(:pantry_item) }
 

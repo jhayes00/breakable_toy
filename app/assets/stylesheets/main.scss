@@ -9,6 +9,12 @@ $dark-green: #537A5A;
 
 .top-bar {
   background-color: $light-green;
+  color: brown;
+  font-family: "Cabin Sketch";
+
+  a {
+    color: brown;
+  }
 }
 
 .logo-text {
@@ -27,5 +33,19 @@ $dark-green: #537A5A;
     //   text-decoration: none;
     //   color: $yellow
     // }
+  }
+}
+
+.light-gray-background {
+  background-color: $light-gray;
+}
+
+.recipe-tile {
+  background-color: white;
+  color: $dark-gray;
+  border: 1px solid $dark-gray;
+  // border-radius: 0.5rem;
+  img {
+    // border-radius: 0.5rem;
   }
 }

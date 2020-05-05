@@ -36,10 +36,7 @@ const PantryIndexContainer = props => {
 
   return(
     <ul>
-      <Link to={{
-        pathname: '/recipes',
-        state: { pantryItems }
-      }}>
+      <Link to='/recipes'>
         Search Recipes
       </Link>
 

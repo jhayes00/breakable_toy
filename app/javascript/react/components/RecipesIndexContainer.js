@@ -5,16 +5,8 @@ import RecipeTile from './RecipeTile'
 const RecipesIndexContainer = props => {
   const [recipes, setRecipes] = useState([]);
 
-
-  let pantryItemsQuery = ""
-  for (const item in props.location.state.pantryItems) {
-    if (item > 0) { pantryItemsQuery += ',+' }
-    pantryItemsQuery += props.location.state.pantryItems[item].name
-  }
-  pantryItemsQuery = pantryItemsQuery.split(' ').join('+')
-
   useEffect(() => {
-    fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${pantryItemsQuery}&number=10&apiKey=${apiKey}`)
+    fetch('/api/v1/recipes.json')
     .then(response => {
       if (response.ok) {
         return response
@@ -27,13 +19,16 @@ const RecipesIndexContainer = props => {
     .then(response => response.json())
     .then(recipeBody => {
       const recipesArr = recipeBody
-      debugger
       setRecipes(recipesArr)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  let recipeTiles = recipes.map((recipe) => {
+  let sorted_recipes = recipes.sort(function(a,b) {
+    return a.missedIngredientCount - b.missedIngredientCount
+  })
+  
+  let recipeTiles = sorted_recipes.map((recipe) => {
     return(
       <RecipeTile
         key={recipe.id}
@@ -47,7 +42,7 @@ const RecipesIndexContainer = props => {
 
   return(
     <div className='grid-container'>
-      <div className='grid-x grid-margin-x grid-padding-y'>
+      <div className='grid-x grid-margin-x grid-padding-y light-gray-background'>
         {recipeTiles}
       </div>
     </div>
