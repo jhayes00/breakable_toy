@@ -4,7 +4,7 @@ import RecipeTile from './RecipeTile'
 
 const RecipesIndexContainer = props => {
   const [recipes, setRecipes] = useState([]);
-  
+
 
   let pantryItemsQuery = ""
   for (const item in props.location.state.pantryItems) {
@@ -27,6 +27,7 @@ const RecipesIndexContainer = props => {
     .then(response => response.json())
     .then(recipeBody => {
       const recipesArr = recipeBody
+      debugger
       setRecipes(recipesArr)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -37,14 +38,19 @@ const RecipesIndexContainer = props => {
       <RecipeTile
         key={recipe.id}
         title={recipe.title}
+        image={recipe.image}
+        numLikes={recipe.likes}
+        numMissedIngredients={recipe.missedIngredientCount}
       />
     )
   })
 
   return(
-    <ul>
-      {recipeTiles}
-    </ul>
+    <div className='grid-container'>
+      <div className='grid-x grid-margin-x grid-padding-y'>
+        {recipeTiles}
+      </div>
+    </div>
   )
 }
 
