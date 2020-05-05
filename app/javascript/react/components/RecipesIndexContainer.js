@@ -4,7 +4,7 @@ import RecipeTile from './RecipeTile'
 
 const RecipesIndexContainer = props => {
   const [recipes, setRecipes] = useState([]);
-  const apiKey="afe381da8ff440b4aba4fea59e3a194d"
+
 
   let pantryItemsQuery = ""
   for (const item in props.location.state.pantryItems) {
