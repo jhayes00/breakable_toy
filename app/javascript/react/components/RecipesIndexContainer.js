@@ -4,10 +4,17 @@ import RecipeTile from './RecipeTile'
 
 const RecipesIndexContainer = props => {
   const [recipes, setRecipes] = useState([]);
+  
 
+  let pantryItemsQuery = ""
+  for (const item in props.location.state.pantryItems) {
+    if (item > 0) { pantryItemsQuery += ',+' }
+    pantryItemsQuery += props.location.state.pantryItems[item].name
+  }
+  pantryItemsQuery = pantryItemsQuery.split(' ').join('+')
 
   useEffect(() => {
-    fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=apples,+flour,+sugar&number=2&apiKey=${apiKey}`)
+    fetch(`https://api.spoonacular.com/recipes/findByIngredients?ingredients=${pantryItemsQuery}&number=10&apiKey=${apiKey}`)
     .then(response => {
       if (response.ok) {
         return response

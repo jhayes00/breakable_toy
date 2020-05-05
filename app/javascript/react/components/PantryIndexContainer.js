@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { Link } from 'react-router-dom'
 
 import PantryItemTile from './PantryItemTile'
 
@@ -35,6 +36,13 @@ const PantryIndexContainer = props => {
 
   return(
     <ul>
+      <Link to={{
+        pathname: '/recipes',
+        state: { pantryItems }
+      }}>
+        Search Recipes
+      </Link>
+
       {pantryItemTiles}
     </ul>
   )
