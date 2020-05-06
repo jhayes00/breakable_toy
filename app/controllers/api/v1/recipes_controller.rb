@@ -2,7 +2,7 @@ class Api::V1::RecipesController < ApplicationController
 
   def index
     pantry_items_query = ""
-    pantry_items = PantryItem.all
+    pantry_items = Item.all
     pantry_items.each do |item|
       if (pantry_items_query != "")
         pantry_items_query += ',+'
