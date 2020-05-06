@@ -35,6 +35,7 @@ const PantryIndexContainer = props => {
       <PantryItemTile
         key={item.id}
         name={item.name}
+        quantity={item.quantity}
       />
     )
   })
