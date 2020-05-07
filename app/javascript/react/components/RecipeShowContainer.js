@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+import IngredientTile from './IngredientTile'
 
 const RecipeShowContainer = props => {
   const [recipe, setRecipe] = useState({
     id: null,
     title: "",
     image: "",
-    missedIngredients: []
+    extendedIngredients: []
   })
 
   useEffect(() => {
     let recipeId = props.match.params.id
-    fetch(`/api/v1/recipes.json`)
+    fetch(`/api/v1/recipes/${recipeId}.json`)
     .then(response => {
       if (response.ok) {
         return response
@@ -22,15 +25,22 @@ const RecipeShowContainer = props => {
     })
     .then(response => response.json())
     .then(recipeBody => {
+
       setRecipe(recipeBody)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  let missedIngredientList = recipe.missedIngredients.map((ingredient) => {
-    <li>ingredient</li>
+  let ingredientList = recipe.extendedIngredients.map((ingredient) => {
+    return(
+      <IngredientTile
+        key={ingredient.id}
+        name={ingredient.name}
+        measuredName={ingredient.original}
+      />
+    )
   })
-
+debugger
   return(
     <div>
       <h3>{recipe.title}</h3>
@@ -40,10 +50,17 @@ const RecipeShowContainer = props => {
         alt="image"
       />
 
-      <h5>Missing Ingredients</h5>
+      <a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a>
+
+      <p>{recipe.summary}</p>
+
+      <h5>Ingredients</h5>
       <ul>
-        {missedIngredientList}
+        {ingredientList}
       </ul>
+
+      <p>{recipe.instructions}</p>
+
     </div>
   )
 }
