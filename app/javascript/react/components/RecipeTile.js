@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const RecipeTile = props => {
@@ -7,9 +7,21 @@ const RecipeTile = props => {
   const image = props.image
   const numLikes = props.numLikes
   const numMissedIngredients = props.numMissedIngredients
+  const [recipe, setRecipe] = useState({
+    id: props.id,
+    title: props.title,
+    image: props.image,
+    numLikes: props.numLikes,
+    numMissedIngredients: props.numMissedIngredients
+  });
+
+  // <Link to={`/recipes/${id}`}>
 
   return (
-    <Link to={`/recipes/${id}`}>
+    <Link to={{
+      pathname: `/recipes/${id}`,
+      state: { recipe }
+    }}>
       <div className='cell small-12 medium-4 text-center recipe-tile'>
         <img
           src={image}
