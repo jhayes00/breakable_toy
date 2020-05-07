@@ -27,7 +27,7 @@ const RecipesIndexContainer = props => {
   let sorted_recipes = recipes.sort(function(a,b) {
     return a.missedIngredientCount - b.missedIngredientCount
   })
-  
+
   let recipeTiles = sorted_recipes.map((recipe) => {
     return(
       <RecipeTile
@@ -42,7 +42,7 @@ const RecipesIndexContainer = props => {
 
   return(
     <div className='grid-container'>
-      <div className='grid-x grid-margin-x grid-padding-y light-gray-background'>
+      <div className='grid-x grid-margin-x grid-padding-y'>
         {recipeTiles}
       </div>
     </div>

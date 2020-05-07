@@ -4,16 +4,33 @@ $light-gray: #909590;
 $light-green: #9AE19D;
 $dark-green: #537A5A;
 
+$blue: #2FA2CC;
+$light-gray: #EFEFEF;
+
 @import url('https://fonts.googleapis.com/css2?family=Merienda+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap');
 
+h3 {
+  font-family: "Merienda One";
+  color: $med-gray;
+  a {
+    color: $blue;
+    font-family: "Cabin Sketch";
+  }
+}
+
 .top-bar {
-  background-color: $light-green;
+  // background-color: $light-green;
+  background-color: $light-gray;
   color: brown;
   font-family: "Cabin Sketch";
+  border-bottom: 2px solid $blue;
+  // border-bottom: 2px solid #A7ABDD;
+  // border-bottom: 2px solid #7776bc;
+  // border-bottom: 2px solid #004643;
 
   a {
-    color: brown;
+    color: $blue;
   }
 }
 
@@ -37,19 +54,29 @@ $dark-green: #537A5A;
 }
 
 .light-gray-background {
+  // background-color: $light-gray;
   background-color: $light-gray;
 }
 
 .recipe-tile {
   background-color: white;
-  color: $dark-gray;
-  border: 1px solid $dark-gray;
+  color: $med-gray;
+  // border: 1px solid $dark-gray;
   // border-radius: 0.5rem;
+
+  margin: 10px;
   img {
     // border-radius: 0.5rem;
   }
 }
 
 .pantry {
+  color: $med-gray;
+  background-color: white;
   padding-left: 50px;
+  // border: 2px solid $med-gray;
+}
+
+.button {
+  background-color: $blue
 }
