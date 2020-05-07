@@ -32,6 +32,7 @@ const RecipesIndexContainer = props => {
     return(
       <RecipeTile
         key={recipe.id}
+        id={recipe.id}
         title={recipe.title}
         image={recipe.image}
         numLikes={recipe.likes}

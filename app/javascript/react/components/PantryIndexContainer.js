@@ -41,7 +41,7 @@ const PantryIndexContainer = props => {
   })
 
   return(
-    <div className="grid-container">
+    <div className="grid-container pantry-container">
       <div className="grid-x grid-margin-x">
         <div className="cell small-12 medium-4">
           <h3><Link to='/recipes'>
@@ -53,7 +53,7 @@ const PantryIndexContainer = props => {
           />
         </div>
 
-        <div className="cell small-12 medium-8 pantry">
+        <div className="cell small-12 medium-4 pantry">
           <h3>Current Pantry</h3>
           <ul>
             {pantryItemTiles}
