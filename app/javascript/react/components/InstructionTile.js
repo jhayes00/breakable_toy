@@ -2,15 +2,16 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const InstructionTile = props => {
-  const id = props.id
-  const instructions = props.instrcutions
+  // const id = props.id
+  const number = props.number
+  const step = props.step
 
   // Consider dividing instruction string into a bulleted list.
 
   return (
-    <li>
-      {instrcutions}
-    </li>
+    <p>
+      Step {number} - {step}
+    </p>
   )
 }
 
