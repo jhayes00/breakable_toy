@@ -73,10 +73,14 @@ h3 {
 .pantry {
   color: $med-gray;
   background-color: white;
-  padding-left: 50px;
+  padding-left: 65px;
   // border: 2px solid $med-gray;
 }
 
 .button {
   background-color: $blue
+}
+
+.pantry-container {
+  margin-left: 20rem;
 }
