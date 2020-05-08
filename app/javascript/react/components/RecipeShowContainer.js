@@ -56,13 +56,9 @@ const RecipeShowContainer = props => {
     })
   }
 
-
-
-
-
   // <p>{recipe.summary}</p>
   // <p>{recipe.instructions}</p>
-
+// debugger
   return(
     <div className="grid-container">
       <div className="grid-x grid-margin-x">
@@ -80,7 +76,7 @@ const RecipeShowContainer = props => {
 
           <p>Cooktime: {recipe.readyInMinutes} Minutes</p>
           <p>Servings: {recipe.servings}</p>
-          <p>Spoonacular Score{recipe.spoonacularScore}</p>
+          <p>Spoonacular Score: {recipe.spoonacularScore}</p>
           <p>Likes: {recipe.aggregateLikes}</p>
         </div>
 

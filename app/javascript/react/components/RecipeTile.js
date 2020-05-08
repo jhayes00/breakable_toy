@@ -7,7 +7,7 @@ const RecipeTile = props => {
   const image = props.image
   const numLikes = props.numLikes
   const numMissedIngredients = props.numMissedIngredients
-
+  const missedIngredients = props.missedIngredients
   // const [recipe, setRecipe] = useState({
   //   id: props.id,
   //   title: props.title,

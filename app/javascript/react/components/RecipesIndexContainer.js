@@ -37,6 +37,7 @@ const RecipesIndexContainer = props => {
         image={recipe.image}
         numLikes={recipe.likes}
         numMissedIngredients={recipe.missedIngredientCount}
+        missedIngredients={recipe.missedIngredients}
       />
     )
   })
