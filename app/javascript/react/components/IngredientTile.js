@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 const IngredientTile = props => {
@@ -8,34 +8,34 @@ const IngredientTile = props => {
   const missedIngredients = props.missedIngredients
   let selected = props.selected
   let handleClick = props.handleClick
-
-  // const [altIngredients, setAltIngredients] = useState({
-  //   ingredient: "",
-  //   substitutes: [],
-  //   message: ""
-  // });
-
-
-
-
-
+  let altIngredients = props.altIngredients
+  let substitutes
   let isMissing = ""
-  // missedIngredients.forEach((missedIngredient) => {
-  //   if (name == missedIngredient.name) {
-  //     isMissing = "is-missing"
-  //   }
-  // })
+
+  isMissing = "is-missing"
+  isMissing = ""
 
   if (selected) {
-    isMissing = "is-missing"
+    if (altIngredients.status == "success") {
+      substitutes = altIngredients.substitutes.map((substitute) => {
+        return(
+          <p>{substitute}</p>
+        )
+      })
+    } else {
+      substitutes = altIngredients.message
+    }
   } else {
-    isMissing = ""
+    substitutes = ""
   }
 
   return (
-    <li className={isMissing} onClick={handleClick}>
-      {measuredName}
-    </li>
+    <div>
+      <li className={isMissing} onClick={handleClick}>
+        {measuredName}
+      </li>
+      {substitutes}
+    </div>
   )
 }
 

@@ -15,6 +15,13 @@ const RecipeShowContainer = props => {
   })
   const [selectedIngredient, setSelectedIngredient] = useState()
 
+  const [altIngredients, setAltIngredients] = useState({
+    status: "",
+    ingredient: "",
+    substitutes: [],
+    message: ""
+  });
+
   useEffect(() => {
     let recipeId = props.match.params.id
     fetch(`/api/v1/recipes/${recipeId}.json`)
@@ -47,7 +54,25 @@ const RecipeShowContainer = props => {
     }
     else {
       setSelectedIngredient(ingredient.name)
+
+      fetch(`/api/v1/ingredients/${ingredient.name}.json`)
+      .then(response => {
+        if (response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => response.json())
+      .then(substitutesBody => {
+        // debugger
+        setAltIngredients(substitutesBody)
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
     }
+    // debugger
   }
 
   let selected
@@ -69,6 +94,7 @@ const RecipeShowContainer = props => {
         measuredName={ingredient.original}
         selected={selected}
         handleClick={handleClick}
+        altIngredients={altIngredients}
       />
     )
   })
