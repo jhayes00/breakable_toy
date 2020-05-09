@@ -18,8 +18,7 @@ const RecipesIndexContainer = props => {
     })
     .then(response => response.json())
     .then(recipeBody => {
-      const recipesArr = recipeBody
-      setRecipes(recipesArr)
+      setRecipes(recipeBody)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])

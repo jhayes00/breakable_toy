@@ -5,6 +5,7 @@ import IngredientTile from './IngredientTile'
 import InstructionTile from './InstructionTile'
 
 const RecipeShowContainer = props => {
+  // let missingIngredients = props.location.state.missedIngredients
   const [recipe, setRecipe] = useState({
     id: null,
     title: "",
@@ -12,6 +13,7 @@ const RecipeShowContainer = props => {
     extendedIngredients: [],
     analyzedInstructions: []
   })
+  const [selectedIngredient, setSelectedIngredient] = useState()
 
   useEffect(() => {
     let recipeId = props.match.params.id
@@ -27,18 +29,46 @@ const RecipeShowContainer = props => {
     })
     .then(response => response.json())
     .then(recipeBody => {
-
       setRecipe(recipeBody)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
+  // props.location.state.missingIngredients.each(() => {
+  //
+  // })
+
+
+  // missedIngredients={missingIngredients}
+
+  const toggleIngredientSelect = (ingredient) => {
+    if(ingredient.name == selectedIngredient) {
+      setSelectedIngredient(null)
+    }
+    else {
+      setSelectedIngredient(ingredient.name)
+    }
+  }
+
+  let selected
+  let handleClick
   let ingredientList = recipe.extendedIngredients.map((ingredient) => {
+    selected = false
+    if (selectedIngredient == ingredient.name) {
+      selected = true
+    }
+
+    handleClick = () => {
+      toggleIngredientSelect(ingredient)
+    }
+
     return(
       <IngredientTile
         key={ingredient.id}
         name={ingredient.name}
         measuredName={ingredient.original}
+        selected={selected}
+        handleClick={handleClick}
       />
     )
   })
@@ -58,7 +88,7 @@ const RecipeShowContainer = props => {
 
   // <p>{recipe.summary}</p>
   // <p>{recipe.instructions}</p>
-// debugger
+
   return(
     <div className="grid-container">
       <div className="grid-x grid-margin-x">
