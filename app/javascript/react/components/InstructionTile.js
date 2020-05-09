@@ -6,8 +6,6 @@ const InstructionTile = props => {
   const number = props.number
   const step = props.step
 
-  // Consider dividing instruction string into a bulleted list.
-
   return (
     <p>
       Step {number} - {step}

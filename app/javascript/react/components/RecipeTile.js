@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const RecipeTile = props => {
@@ -7,19 +7,6 @@ const RecipeTile = props => {
   const image = props.image
   const numLikes = props.numLikes
   const numMissedIngredients = props.numMissedIngredients
-  const missedIngredients = props.missedIngredients
-  // const [recipe, setRecipe] = useState({
-  //   id: props.id,
-  //   title: props.title,
-  //   image: props.image,
-  //   numLikes: props.numLikes,
-  //   numMissedIngredients: props.numMissedIngredients
-  // });
-
-  // <Link to={{
-  //   pathname: `/recipes/${id}`,
-  //   state: { recipe }
-  // }}>
 
   return (
     <Link to={`/recipes/${id}`}>

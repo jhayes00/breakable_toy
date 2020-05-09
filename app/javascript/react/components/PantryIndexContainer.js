@@ -20,8 +20,7 @@ const PantryIndexContainer = props => {
     })
     .then(response => response.json())
     .then(pantryBody => {
-      const pantryArr = pantryBody
-      setPantryItems(pantryArr)
+      setPantryItems(pantryBody)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
