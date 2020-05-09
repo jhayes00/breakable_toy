@@ -1,19 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const IngredientTile = props => {
   const id = props.id
   const name = props.name
   const measuredName = props.measuredName
   const missedIngredients = props.missedIngredients
-  let selected = props.selected
-  let handleClick = props.handleClick
-  let altIngredients = props.altIngredients
+  const selected = props.selected
+  const handleClick = props.handleClick
+  const altIngredients = props.altIngredients
+  const isInPantry = props.isInPantry
   let substitutes
   let isMissing = ""
 
-  isMissing = "is-missing"
-  isMissing = ""
+  if (isInPantry) {
+    isMissing = ""
+  } else {
+    isMissing = "is-missing"
+  }
 
   if (selected) {
     if (altIngredients.status == "success") {

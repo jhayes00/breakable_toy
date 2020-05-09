@@ -5,7 +5,9 @@ import IngredientTile from './IngredientTile'
 import InstructionTile from './InstructionTile'
 
 const RecipeShowContainer = props => {
-  // let missingIngredients = props.location.state.missedIngredients
+  const [pantryItems, setPantryItems] = useState([]);
+  const [selectedIngredient, setSelectedIngredient] = useState()
+
   const [recipe, setRecipe] = useState({
     id: null,
     title: "",
@@ -13,7 +15,6 @@ const RecipeShowContainer = props => {
     extendedIngredients: [],
     analyzedInstructions: []
   })
-  const [selectedIngredient, setSelectedIngredient] = useState()
 
   const [altIngredients, setAltIngredients] = useState({
     status: "",
@@ -41,12 +42,28 @@ const RecipeShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  // props.location.state.missingIngredients.each(() => {
-  //
-  // })
-
-
-  // missedIngredients={missingIngredients}
+  useEffect(() => {
+    fetch("/api/v1/items.json")
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .then(response => response.json())
+    .then(pantryBody => {
+      const pantryArr = pantryBody.map((item) => {
+        return(
+          item.name
+        )
+      })
+      setPantryItems(pantryArr)
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }, [])
 
   const toggleIngredientSelect = (ingredient) => {
     if(ingredient.name == selectedIngredient) {
@@ -54,7 +71,6 @@ const RecipeShowContainer = props => {
     }
     else {
       setSelectedIngredient(ingredient.name)
-
       fetch(`/api/v1/ingredients/${ingredient.name}.json`)
       .then(response => {
         if (response.ok) {
@@ -67,17 +83,22 @@ const RecipeShowContainer = props => {
       })
       .then(response => response.json())
       .then(substitutesBody => {
-        // debugger
         setAltIngredients(substitutesBody)
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
     }
-    // debugger
   }
 
   let selected
   let handleClick
+  let isInPantry
   let ingredientList = recipe.extendedIngredients.map((ingredient) => {
+    if (pantryItems.includes(ingredient.name)) {
+      isInPantry = true
+    } else {
+      isInPantry = false
+    }
+
     selected = false
     if (selectedIngredient == ingredient.name) {
       selected = true
@@ -95,6 +116,7 @@ const RecipeShowContainer = props => {
         selected={selected}
         handleClick={handleClick}
         altIngredients={altIngredients}
+        isInPantry={isInPantry}
       />
     )
   })
@@ -111,9 +133,6 @@ const RecipeShowContainer = props => {
       )
     })
   }
-
-  // <p>{recipe.summary}</p>
-  // <p>{recipe.instructions}</p>
 
   return(
     <div className="grid-container">
@@ -137,7 +156,7 @@ const RecipeShowContainer = props => {
         </div>
 
         <div className="cell small-12 medium-12">
-          <h5>Ingredients</h5>
+          <h5>Ingredients (missing ingredients are red, click for substitutes)</h5>
           <ul>
             {ingredientList}
           </ul>

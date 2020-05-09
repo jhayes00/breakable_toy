@@ -7,15 +7,6 @@ const RecipeTile = props => {
   const image = props.image
   const numLikes = props.numLikes
   const numMissedIngredients = props.numMissedIngredients
-  // const missedIngredients = props.missedIngredients
-  const [missedIngredients, setMissedIngredients] = useState(props.missedIngredients);
-
-
-
-  // <Link to={{
-  //   pathname: `/recipes/${id}`,
-  //   state: { missedIngredients }
-  // }}>
 
   return (
     <Link to={`/recipes/${id}`}>
