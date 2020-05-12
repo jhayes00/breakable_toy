@@ -37,8 +37,14 @@ const PantryIndexContainer = props => {
   const onChangeCheckbox = event => {
     if (selectedItems.includes(event.currentTarget.id)) {
       setSelectedItems(selectedItems.filter(id => id !== event.currentTarget.id));
+      setUpdateItem({
+        name: ""
+      });
     } else {
       setSelectedItems([...selectedItems, event.currentTarget.id])
+      setUpdateItem({
+        name: event.currentTarget.value
+      });
     }
   }
 
@@ -86,6 +92,11 @@ const PantryIndexContainer = props => {
     })
   }
 
+  let selectedItem
+  if (selectedItems.length == 1) {
+    selectedItem = selectedItems[0]
+  }
+
   return(
     <div className="grid-container pantry-container">
       <div className="grid-x grid-margin-x">
@@ -96,7 +107,8 @@ const PantryIndexContainer = props => {
 
           <NewPantryItemForm
             updatePantry={updatePantry}
-            selectedItem={selectedItems[0]}
+            selectedItem={selectedItem}
+            updateItem={updateItem}
           />
         </div>
 
