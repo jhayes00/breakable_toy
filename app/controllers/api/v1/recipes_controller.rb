@@ -1,7 +1,6 @@
 class Api::V1::RecipesController < ApplicationController
 
   def index
-    # binding.pry
     pantry_items_query = ""
     pantry_items = current_user.items
     pantry_items.each do |item|
@@ -19,10 +18,8 @@ class Api::V1::RecipesController < ApplicationController
   end
 
   def show
-    # binding.pry
     response = Faraday.get("https://api.spoonacular.com/recipes/#{params[:id]}/information?includeNutrition=false&apiKey=#{ENV["API_KEY"]}")
     parsed_response = JSON.parse(response.body)
-
     render json: parsed_response
   end
 

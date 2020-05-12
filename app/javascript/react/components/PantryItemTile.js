@@ -6,7 +6,6 @@ const PantryItemTile = props => {
   const name = props.name
   const quantity = props.quantity
   const onChangeCheckbox = props.onChangeCheckbox
-  const isChecked = props.isChecked
 
   let quantityString = ""
   if (quantity !== null) {

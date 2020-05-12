@@ -5,6 +5,10 @@ class Api::V1::ItemsController < ApplicationController
     render json: current_user.items
   end
 
+  def show
+    render json: current_user.items.find(params[:id])
+  end
+
   def create
     new_item = Item.new(item_params)
     new_item.user = current_user
@@ -16,6 +20,21 @@ class Api::V1::ItemsController < ApplicationController
 
       }
       render json: { errors: formatted_errors.to_sentence }, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    # binding.pry
+    render json: Item.find(params[:id])
+  end
+
+  def update
+    # binding.pry
+    updated_item = Item.find(params[:id])
+    if updated_item.update(item_params)
+      render json: updated_item
+    else
+      render json: { errors: updated_item.errors.full_messages.to_sentence }, status: :unprocessable_entity
     end
   end
 

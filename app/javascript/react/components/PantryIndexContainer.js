@@ -7,6 +7,10 @@ import NewPantryItemForm from './NewPantryItemForm'
 const PantryIndexContainer = props => {
   const [pantryItems, setPantryItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [updateItem, setUpdateItem] = useState({
+    name: "",
+    quantity: ""
+  })
 
   let updatePantry = () => {
     fetch("/api/v1/items.json")
@@ -50,7 +54,7 @@ const PantryIndexContainer = props => {
     )
   })
 
-  const handleDelete = (event) => {
+  const handleDelete = event => {
     event.preventDefault()
     selectedItems.forEach((item) => {
       fetch(`/api/v1/items/${item}`, {
@@ -92,6 +96,7 @@ const PantryIndexContainer = props => {
 
           <NewPantryItemForm
             updatePantry={updatePantry}
+            selectedItem={selectedItems[0]}
           />
         </div>
 

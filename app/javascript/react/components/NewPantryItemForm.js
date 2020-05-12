@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import _ from 'lodash'
 
 import ErrorList from './ErrorList'
@@ -69,6 +69,40 @@ const NewPantryItemForm = props => {
     }
   }
 
+  const handleEdit = event => {
+    event.preventDefault()
+    debugger
+    if (props.selectedItem !== undefined) {
+      fetch(`/api/v1/items/${props.selectedItem}`, {
+        credentials: "same-origin",
+        method: "PATCH",
+        body: JSON.stringify(formVals),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+      .then(response => {
+        if(response.ok) {
+          return response
+        } else {
+          let errorMessage = `${response.status} (${response.statusText})`,
+          error = new Error(errorMessage)
+          throw error
+        }
+      })
+      .then(response => response.json())
+      .then(parsedData => {
+        if (parsedData.errors){
+        setErrors(parsedData.errors)
+        } else {
+          props.updatePantry()
+        }
+      })
+      .catch(error => console.error(`Error in fetch: ${error.message}`))
+    }
+  }
+
   return(
     <form onSubmit={handleSubmit}>
       <ErrorList
@@ -96,6 +130,7 @@ const NewPantryItemForm = props => {
       />
 
       <input className="button" type="submit" />
+      <div className="button" onClick={handleEdit}>Update Selected</div>
     </form>
   )
 }
