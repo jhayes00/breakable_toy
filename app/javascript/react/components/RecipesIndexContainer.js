@@ -43,7 +43,7 @@ const RecipesIndexContainer = props => {
 
   return(
     <div className='grid-container'>
-      <div className='grid-x grid-margin-x grid-padding-y'>
+      <div className='grid-x grid-margin-x grid-padding-y grid-padding-x'>
         {recipeTiles}
       </div>
     </div>

@@ -22,7 +22,7 @@ const IngredientTile = props => {
     if (altIngredients.status == "success") {
       substitutes = altIngredients.substitutes.map((substitute) => {
         return(
-          <p>{substitute}</p>
+          <div>{substitute}</div>
         )
       })
     } else {
@@ -33,7 +33,7 @@ const IngredientTile = props => {
   }
 
   return (
-    <div>
+    <div><br />
       <li className={isMissing} onClick={handleClick}>
         {measuredName}
       </li>

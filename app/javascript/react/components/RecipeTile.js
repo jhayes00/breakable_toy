@@ -9,17 +9,17 @@ const RecipeTile = props => {
   const numMissedIngredients = props.numMissedIngredients
 
   return (
-    <Link to={`/recipes/${id}`}>
-      <div className='cell small-12 medium-4 text-center recipe-tile'>
+    <div className='cell small-12 medium-4 text-center recipe-tile'>
+      <Link to={`/recipes/${id}`}>
         <img
           src={image}
           alt="image"
         />
         <h5>{title}</h5>
-        Likes: {numLikes} <br />
-        Missing Ingredients: {numMissedIngredients}
-      </div>
-    </Link>
+      </Link>
+      Likes: {numLikes} <br />
+      Missing Ingredients: {numMissedIngredients}
+    </div>
   )
 }
 

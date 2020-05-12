@@ -134,11 +134,45 @@ const RecipeShowContainer = props => {
     })
   }
 
+  // <div className="grid-container">
+  //   <div className="grid-x grid-margin-x">
+  //     <div className="cell small-12 medium-6">
+  //       <h3>{recipe.title}</h3>
+  //
+  //       <img
+  //         src={recipe.image}
+  //         alt="image"
+  //       />
+  //     </div>
+  //
+  //     <div className="cell small-12 medium-6">
+  //       <p><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></p>
+  //
+  //       <p>Cooktime: {recipe.readyInMinutes} Minutes</p>
+  //       <p>Servings: {recipe.servings}</p>
+  //       <p>Spoonacular Score: {recipe.spoonacularScore}</p>
+  //       <p>Likes: {recipe.aggregateLikes}</p>
+  //     </div>
+  //
+  //     <div className="cell small-12 medium-12">
+  //       <h5>Ingredients (missing ingredients are red, click for substitutes)</h5>
+  //       <ul>
+  //         {ingredientList}
+  //       </ul>
+  //     </div>
+  //
+  //     <div className="cell small-12 medium-12">
+  //       <h5>Instructions</h5>
+  //       {instructionList}
+  //     </div>
+  //   </div>
+  // </div>
+
   return(
     <div className="grid-container">
-      <div className="grid-x grid-margin-x">
+      <div className="grid-x grid-margin-x grid-padding-x grid-padding-y">
         <div className="cell small-12 medium-6">
-          <h3>{recipe.title}</h3>
+
 
           <img
             src={recipe.image}
@@ -146,24 +180,25 @@ const RecipeShowContainer = props => {
           />
         </div>
 
-        <div className="cell small-12 medium-6">
-          <p><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></p>
-
-          <p>Cooktime: {recipe.readyInMinutes} Minutes</p>
-          <p>Servings: {recipe.servings}</p>
-          <p>Spoonacular Score: {recipe.spoonacularScore}</p>
-          <p>Likes: {recipe.aggregateLikes}</p>
+        <div className="cell small-12 medium-6 recipe-info">
+        <h3>{recipe.title}</h3>
+          <h5><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></h5>
+          <h5>Servings: {recipe.servings}</h5>
+          <h5>Cooktime: {recipe.readyInMinutes} Minutes</h5>
+          <h5>Spoonacular Score: {recipe.spoonacularScore}</h5>
+          <h5>Likes: {recipe.aggregateLikes}</h5>
         </div>
 
-        <div className="cell small-12 medium-12">
-          <h5>Ingredients (missing ingredients are red, click for substitutes)</h5>
+        <div className="cell small-12 medium-6 ingredients">
+          <h4>Ingredients</h4>
+          <h5 className="instructions">Missing ingredients are red, click for substitutes.</h5>
           <ul>
             {ingredientList}
           </ul>
         </div>
 
-        <div className="cell small-12 medium-12">
-          <h5>Instructions</h5>
+        <div className="cell small-12 medium-6 ingredients">
+          <h4>Instructions</h4>
           {instructionList}
         </div>
       </div>
