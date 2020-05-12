@@ -3,7 +3,6 @@ $med-gray: #474A48;
 $light-gray: #909590;
 $light-green: #9AE19D;
 $dark-green: #537A5A;
-
 $blue: #2FA2CC;
 $light-gray: #EFEFEF;
 
@@ -19,15 +18,24 @@ h3 {
   }
 }
 
+h4 {
+  color: $blue;
+  font-family: "Cabin Sketch";
+}
+
+.instructions {
+  font-style: italic;
+  text-decoration: underline;
+}
+
 .top-bar {
-  // background-color: $light-green;
   background-color: $light-gray;
-  color: brown;
+  color: $med-gray;
   font-family: "Cabin Sketch";
   border-bottom: 2px solid $blue;
-  // border-bottom: 2px solid #A7ABDD;
-  // border-bottom: 2px solid #7776bc;
-  // border-bottom: 2px solid #004643;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  margin-bottom: 1rem;
 
   a {
     color: $blue;
@@ -35,57 +43,68 @@ h3 {
 }
 
 .logo-text {
-  // h1 {
-  //   line-height: 1;
-  //   margin-top: 1rem;
-  //   margin-bottom: 0.5rem;
-  // }
-  //
   a {
     color: $med-gray;
     font-family: "Merienda One";
-    // font-family: "Cabin Sketch";
 
-    // &:hover {
-    //   text-decoration: none;
-    //   color: $yellow
-    // }
+    &:hover {
+      text-shadow: 5px 5px 5px $blue;
+    }
   }
 }
 
 .light-gray-background {
-  // background-color: $light-gray;
   background-color: $light-gray;
 }
 
 .recipe-tile {
   background-color: white;
   color: $med-gray;
-  // border: 1px solid $dark-gray;
-  // border-radius: 0.5rem;
-
-  margin: 10px;
-  img {
-    // border-radius: 0.5rem;
-  }
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .pantry {
   color: $med-gray;
   background-color: white;
-  padding-left: 65px;
-  // border: 2px solid $med-gray;
+}
+
+.ingredients {
+  color: $med-gray;
+  background-color: white;
+}
+
+.recipe-info {
+  color: $med-gray;
+
+  a {
+    color: $blue;
+  }
 }
 
 .button {
   background-color: $blue;
-  margin: 1px;
-}
-
-.pantry-container {
-  margin-left: 20rem;
+  margin: 0.5rem;
 }
 
 .is-missing {
   color: red;
+}
+
+.inactive-button {
+  background-color: $med-gray;
+  color: $light-gray;
+
+  &:hover {
+    background-color: $light-gray;
+  }
+}
+
+.sign-in {
+  color: $med-gray;
+
+  a {
+    color: $blue;
+    font-family: "Cabin Sketch";
+  }
 }

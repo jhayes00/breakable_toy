@@ -46,6 +46,8 @@ const PantryIndexContainer = props => {
         name: event.currentTarget.value
       });
     }
+
+
   }
 
   let pantryItemTiles = pantryItems.map((item) => {
@@ -97,10 +99,15 @@ const PantryIndexContainer = props => {
     selectedItem = selectedItems[0]
   }
 
+  let deleteButton = "button"
+  if (selectedItems.length == 0) {
+    deleteButton = "button inactive-button"
+  }
+
   return(
     <div className="grid-container pantry-container">
-      <div className="grid-x grid-margin-x">
-        <div className="cell small-12 medium-4">
+      <div className="grid-x grid-margin-x grid-padding-x grid-padding-y">
+        <div className="cell small-12 medium-6">
           <h3><Link to='/recipes'>
             Search Recipes
           </Link></h3>
@@ -112,12 +119,12 @@ const PantryIndexContainer = props => {
           />
         </div>
 
-        <div className="cell small-12 medium-4 pantry">
+        <div className="cell small-12 medium-6 pantry">
           <h3>Current Pantry</h3>
           <ul>
             {pantryItemTiles}
           </ul>
-          <div className="button" onClick={handleDelete}>Delete Selected</div>
+          <div className={deleteButton} onClick={handleDelete}>Delete Selected</div>
         </div>
       </div>
     </div>

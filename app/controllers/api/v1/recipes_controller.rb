@@ -1,6 +1,6 @@
 class Api::V1::RecipesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     pantry_items_query = ""
     pantry_items = current_user.items

@@ -71,7 +71,6 @@ const NewPantryItemForm = props => {
 
   const handleEdit = event => {
     event.preventDefault()
-    debugger
     if (props.selectedItem !== undefined) {
       fetch(`/api/v1/items/${props.selectedItem}`, {
         credentials: "same-origin",
@@ -103,6 +102,18 @@ const NewPantryItemForm = props => {
     }
   }
 
+  // formVals.name = props.updateItem.name
+
+  let editButton = "button"
+  if (props.selectedItem == undefined) {
+    editButton = "button inactive-button"
+  }
+
+  let submitButton = "button"
+  // if (formVals.name.length == 0) {
+  //   submitButton = "button inactive-button"
+  // }
+
   return(
     <form onSubmit={handleSubmit}>
       <ErrorList
@@ -129,8 +140,8 @@ const NewPantryItemForm = props => {
         value={formVals.quantity}
       />
 
-      <input className="button" type="submit" />
-      <div className="button" onClick={handleEdit}>Update Selected</div>
+      <input className={submitButton} type="submit" />
+      <div className={editButton} onClick={handleEdit}>Update Selected</div>
     </form>
   )
 }
