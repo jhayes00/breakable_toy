@@ -30,7 +30,7 @@ h4 {
 
 .top-bar {
   background-color: $light-gray;
-  color: brown;
+  color: $med-gray;
   font-family: "Cabin Sketch";
   border-bottom: 2px solid $blue;
   padding-left: 2rem;
@@ -97,5 +97,14 @@ h4 {
 
   &:hover {
     background-color: $light-gray;
+  }
+}
+
+.sign-in {
+  color: $med-gray;
+
+  a {
+    color: $blue;
+    font-family: "Cabin Sketch";
   }
 }
