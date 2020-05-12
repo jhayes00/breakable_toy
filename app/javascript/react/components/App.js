@@ -5,11 +5,13 @@ import RecipesIndexContainer from './RecipesIndexContainer'
 import RecipeShowContainer from './RecipeShowContainer'
 import PantryIndexContainer from './PantryIndexContainer'
 
+// <Route exact path='/'><Redirect to='/pantry' /></Route>
+
 export const App = (props) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'><Redirect to='/pantry' /></Route>
+
         <Route exact path='/recipes' component={RecipesIndexContainer}/>
         <Route exact path='/recipes/:id' component={RecipeShowContainer}/>
         <Route exact path='/pantry' component={PantryIndexContainer}/>

@@ -1,4 +1,5 @@
 class Api::V1::IngredientsController < ApplicationController
+  before_action :authenticate_user!
 
   def show
     substitutes_query = params[:id].gsub(' ', '+')

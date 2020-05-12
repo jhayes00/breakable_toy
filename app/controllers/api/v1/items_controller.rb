@@ -1,5 +1,6 @@
 class Api::V1::ItemsController < ApplicationController
   protect_from_forgery unless: -> { request.format.json? }
+  before_action :authenticate_user!
 
   def index
     render json: current_user.items
@@ -24,12 +25,10 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def edit
-    # binding.pry
     render json: Item.find(params[:id])
   end
 
   def update
-    # binding.pry
     updated_item = Item.find(params[:id])
     if updated_item.update(item_params)
       render json: updated_item
