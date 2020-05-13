@@ -102,17 +102,12 @@ const NewPantryItemForm = props => {
     }
   }
 
-  // formVals.name = props.updateItem.name
-
   let editButton = "button"
   if (props.selectedItem == undefined) {
     editButton = "button inactive-button"
   }
 
   let submitButton = "button"
-  // if (formVals.name.length == 0) {
-  //   submitButton = "button inactive-button"
-  // }
 
   return(
     <form onSubmit={handleSubmit}>
@@ -121,7 +116,6 @@ const NewPantryItemForm = props => {
       />
 
       <h3>Add New Pantry Item</h3>
-
       <label htmlFor="name">Pantry Item Name:</label>
       <input
         type="text"
