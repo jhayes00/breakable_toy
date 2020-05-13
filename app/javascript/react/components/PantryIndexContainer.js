@@ -46,8 +46,6 @@ const PantryIndexContainer = props => {
         name: event.currentTarget.value
       });
     }
-
-
   }
 
   let pantryItemTiles = pantryItems.map((item) => {

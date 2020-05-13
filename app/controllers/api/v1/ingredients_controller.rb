@@ -8,10 +8,4 @@ class Api::V1::IngredientsController < ApplicationController
 
     render json: parsed_response
   end
-
-  # def search
-  #   # fetch here
-  #   # use http party
-  # end
-
 end

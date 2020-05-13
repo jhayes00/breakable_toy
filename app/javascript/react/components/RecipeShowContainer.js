@@ -134,46 +134,10 @@ const RecipeShowContainer = props => {
     })
   }
 
-  // <div className="grid-container">
-  //   <div className="grid-x grid-margin-x">
-  //     <div className="cell small-12 medium-6">
-  //       <h3>{recipe.title}</h3>
-  //
-  //       <img
-  //         src={recipe.image}
-  //         alt="image"
-  //       />
-  //     </div>
-  //
-  //     <div className="cell small-12 medium-6">
-  //       <p><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></p>
-  //
-  //       <p>Cooktime: {recipe.readyInMinutes} Minutes</p>
-  //       <p>Servings: {recipe.servings}</p>
-  //       <p>Spoonacular Score: {recipe.spoonacularScore}</p>
-  //       <p>Likes: {recipe.aggregateLikes}</p>
-  //     </div>
-  //
-  //     <div className="cell small-12 medium-12">
-  //       <h5>Ingredients (missing ingredients are red, click for substitutes)</h5>
-  //       <ul>
-  //         {ingredientList}
-  //       </ul>
-  //     </div>
-  //
-  //     <div className="cell small-12 medium-12">
-  //       <h5>Instructions</h5>
-  //       {instructionList}
-  //     </div>
-  //   </div>
-  // </div>
-
   return(
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-padding-x grid-padding-y">
         <div className="cell small-12 medium-6">
-
-
           <img
             src={recipe.image}
             alt="image"
