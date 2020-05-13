@@ -8,7 +8,7 @@ const InstructionTile = props => {
 
   return (
     <p>
-      Step {number} - {step}
+      <b>Step {number}</b> - {step}
     </p>
   )
 }

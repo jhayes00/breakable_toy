@@ -13,9 +13,9 @@ const IngredientTile = props => {
   let isMissing = ""
 
   if (isInPantry) {
-    isMissing = ""
+    isMissing = "ingredient"
   } else {
-    isMissing = "is-missing"
+    isMissing = "ingredient is-missing"
   }
 
   if (selected) {

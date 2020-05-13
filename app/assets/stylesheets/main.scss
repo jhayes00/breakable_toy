@@ -87,6 +87,14 @@ h4 {
   margin: 0.5rem;
 }
 
+.ingredient {
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+}
+
 .is-missing {
   color: red;
 }
