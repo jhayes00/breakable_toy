@@ -1,17 +1,16 @@
 # SQRL
-
-https://app.codeship.com/projects/46bf90a0-707e-0138-fb9d-16f1b1567469/status?branch=master
-
-This app allows signed-in users to track items that exist in their pantry, and to search for recipes that use those ingredients.  If the user finds a recipe they want to make but they are missing an ingredient, they can click that ingredient to see a list of alternatives.
+This app allows signed-in users to track items that exist in their pantry, and to search for recipes that use those ingredients via the Spoonacular API.  If the user finds a recipe they want to make but they are missing an ingredient, they can click that ingredient to see a list of alternatives.
 
 ## Usage
 Visit https://sqrl-pantry.herokuapp.com/
 
 -or-
 
-Start the Rails server from the root folder.
+Bundle, migrate database, and start the Rails server from the root folder.
 ```
-$ rails s
+$ bundle exec bundle install
+$ bundle exec rake db:migrate
+$ bundle exec rails s
 ```
 Then navigate to http://localhost:3000 in your browser.
 
