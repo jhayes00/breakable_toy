@@ -15,6 +15,7 @@ const PantryItemTile = props => {
   return (
     <div>
       <input
+        className="checkbox"
         type="checkbox"
         key={id}
         id={id}

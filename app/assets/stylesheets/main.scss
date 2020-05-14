@@ -20,7 +20,7 @@ h4 {
   font-family: "Cabin Sketch";
 }
 
-.instructions {
+.directions {
   font-style: italic;
   text-decoration: underline;
 }
@@ -29,6 +29,7 @@ h4 {
   background-color: $light-gray;
   color: $med-gray;
   font-family: "Cabin Sketch";
+  font-size: 24px;
   border-bottom: 2px solid $blue;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -52,6 +53,10 @@ h4 {
 
 .light-gray-background {
   background-color: $light-gray;
+  background-image: url(/assets/sqrl4.png);
+  background-size: 20rem;
+  background-position: top right;
+  background-repeat: no-repeat;
 }
 
 .recipe-tile {
@@ -59,16 +64,36 @@ h4 {
   color: $med-gray;
   margin-top: 1rem;
   margin-bottom: 1rem;
+  border-radius: 0.5rem;
+
+  img {
+    border-radius: 0.5rem;
+  }
+}
+
+img {
+  border-radius: 0.5rem;
 }
 
 .pantry {
   color: $med-gray;
   background-color: white;
+  font-weight: bold;
+  text-transform: capitalize;
+  border-radius: 0.5rem;
 }
 
 .ingredients {
   color: $med-gray;
   background-color: white;
+  border-radius: 0.5rem;
+  font-weight: bold;
+}
+
+.instructions {
+  color: $med-gray;
+  background-color: white;
+  border-radius: 0.5rem;
 }
 
 .recipe-info {
@@ -82,6 +107,7 @@ h4 {
 .button {
   background-color: $blue;
   margin: 0.5rem;
+  border-radius: 0.5rem;
 }
 
 .ingredient {
@@ -93,7 +119,7 @@ h4 {
 }
 
 .is-missing {
-  color: red;
+  color: $blue;
 }
 
 .inactive-button {
@@ -112,4 +138,16 @@ h4 {
     color: $blue;
     font-family: "Cabin Sketch";
   }
+}
+
+.checkbox {
+  margin: 0.5rem;
+}
+
+.text-input {
+  border-radius: 0.5rem;
+}
+
+.logo {
+  height: 4rem;
 }

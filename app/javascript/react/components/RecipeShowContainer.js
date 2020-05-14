@@ -105,6 +105,13 @@ const RecipeShowContainer = props => {
     }
 
     handleClick = () => {
+      setAltIngredients({
+        status: "",
+        ingredient: "",
+        substitutes: [],
+        message: ""
+      });
+
       toggleIngredientSelect(ingredient)
     }
 
@@ -155,13 +162,13 @@ const RecipeShowContainer = props => {
 
         <div className="cell small-12 medium-6 ingredients">
           <h4>Ingredients</h4>
-          <h5 className="instructions">Missing ingredients are red, click for substitutes.</h5>
+          <h5 className="directions">Missing ingredients are blue, click for substitutes.</h5>
           <ul>
             {ingredientList}
           </ul>
         </div>
 
-        <div className="cell small-12 medium-6 ingredients">
+        <div className="cell small-12 medium-6 instructions">
           <h4>Instructions</h4>
           {instructionList}
         </div>
