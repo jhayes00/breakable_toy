@@ -117,7 +117,7 @@ const PantryIndexContainer = props => {
           />
         </div>
 
-        <div className="cell small-12 medium-6 pantry">
+        <div className="cell small-12 medium-5 pantry">
           <h3>Current Pantry</h3>
           <ul>
             {pantryItemTiles}

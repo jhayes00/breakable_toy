@@ -118,6 +118,7 @@ const NewPantryItemForm = props => {
       <h3>Add New Pantry Item</h3>
       <label htmlFor="name">Pantry Item Name:</label>
       <input
+        className="text-input"
         type="text"
         name="name"
         id="name"
@@ -125,8 +126,9 @@ const NewPantryItemForm = props => {
         value={formVals.name}
       />
 
-      <label htmlFor="quantity">Quantity:</label>
+      <label htmlFor="quantity">Quantity (optional):</label>
       <input
+        className="text-input"
         type="text"
         name="quantity"
         id="quantity"
