@@ -37,7 +37,19 @@ const RecipeShowContainer = props => {
     })
     .then(response => response.json())
     .then(recipeBody => {
-      setRecipe(recipeBody)
+      setRecipe({
+        id: recipeBody.id,
+        title: recipeBody.title,
+        image: recipeBody.image,
+        sourceUrl: recipeBody.source_url,
+        sourceName: recipeBody.source_name,
+        servings: recipeBody.servings,
+        readyInMinutes: recipeBody.ready_in_minutes,
+        spoonacularScore: recipeBody.spoonacular_score,
+        aggregateLikes: recipeBody.num_likes,
+        extendedIngredients: recipeBody.extended_ingredients,
+        analyzedInstructions: recipeBody.analyzed_instructions
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
@@ -130,6 +142,7 @@ const RecipeShowContainer = props => {
 
   let instructionList
   if (recipe.analyzedInstructions.length > 0) {
+    debugger
     instructionList = recipe.analyzedInstructions[0].steps.map((instructionStep) => {
       return(
         <InstructionTile
