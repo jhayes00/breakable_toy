@@ -1,18 +1,25 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::ItemsController, type: :controller do
-  xdescribe "GET#index" do
-    # let!(:pantry_item1) { FactoryBot.create(:pantry_item) }
-    # let!(:pantry_item2) { FactoryBot.create(:pantry_item) }
-
+  describe "GET#index" do
+    let!(:item1) { FactoryBot.create(:item) }
+    let!(:item2) { FactoryBot.create(:item) }
+    let!(:user1) { FactoryBot.create(:user) }
+# binding.pry
     it "returns successful response code and json content" do
-      get :index
+# binding.pry
+      # item1 = FactoryBot.create(:item)
+      # item2 = FactoryBot.create(:item)
+      # user1 = FactoryBot.create(:user)
 
+      sign_in user1
+      get :index
+# binding.pry
       expect(response.status).to eq 200
       expect(response.content_type).to eq 'application/json'
     end
 
-    it "returns all pantry items in the db" do
+    xit "returns all pantry items in the db" do
       item1 = Item.create(name: 'butter')
       item2 = Item.create(name: 'salt')
 
