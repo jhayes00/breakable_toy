@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :items, only: [:index, :show, :create, :edit, :update, :destroy]
       resources :recipes, only: [:index, :show]
       resources :ingredients, only: [:show]
+      resources :users, only: [:show]
     end
   end
 
@@ -17,4 +18,5 @@ Rails.application.routes.draw do
   get "/recipes", to: 'homes#index'
   get "/recipes/:id", to: 'homes#index'
   get "/pantry", to: 'homes#index'
+  get "/users/:id", to: 'homes#index'
 end
