@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_06_132123) do
+ActiveRecord::Schema.define(version: 2020_05_19_232913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "favorite_recipes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recipe_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_favorite_recipes_on_recipe_id"
+    t.index ["user_id"], name: "index_favorite_recipes_on_user_id"
+  end
 
   create_table "ingredients", force: :cascade do |t|
     t.bigint "recipe_id"
@@ -42,6 +51,13 @@ ActiveRecord::Schema.define(version: 2020_05_06_132123) do
     t.string "image"
     t.integer "num_likes"
     t.integer "num_missed_ingredients"
+    t.string "source_url"
+    t.string "source_name"
+    t.string "servings"
+    t.string "ready_in_minutes"
+    t.string "spoonacular_score"
+    t.text "analyzed_instructions"
+    t.text "extended_ingredients"
   end
 
   create_table "users", force: :cascade do |t|

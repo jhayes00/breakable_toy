@@ -37,7 +37,19 @@ const RecipeShowContainer = props => {
     })
     .then(response => response.json())
     .then(recipeBody => {
-      setRecipe(recipeBody)
+      setRecipe({
+        id: recipeBody.id,
+        title: recipeBody.title,
+        image: recipeBody.image,
+        sourceUrl: recipeBody.source_url,
+        sourceName: recipeBody.source_name,
+        servings: recipeBody.servings,
+        readyInMinutes: recipeBody.ready_in_minutes,
+        spoonacularScore: recipeBody.spoonacular_score,
+        aggregateLikes: recipeBody.num_likes,
+        extendedIngredients: recipeBody.extended_ingredients,
+        analyzedInstructions: recipeBody.analyzed_instructions
+      })
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
@@ -141,6 +153,28 @@ const RecipeShowContainer = props => {
     })
   }
 
+  const favoriteGame = (event) => {
+    let recipeId = props.match.params.id
+    fetch(`/api/v1/recipes/${recipeId}/favorite_recipes`, {
+      credentials: "same-origin",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+
   return(
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-padding-x grid-padding-y">
@@ -152,7 +186,10 @@ const RecipeShowContainer = props => {
         </div>
 
         <div className="cell small-12 medium-6 recipe-info">
-        <h3>{recipe.title}</h3>
+          <h3>{recipe.title}</h3>
+          <div className='button' onClick={favoriteGame}>
+            ADD TO FAVORITES
+          </div><br /><br />
           <h5><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></h5>
           <h5>Servings: {recipe.servings}</h5>
           <h5>Cooktime: {recipe.readyInMinutes} Minutes</h5>
