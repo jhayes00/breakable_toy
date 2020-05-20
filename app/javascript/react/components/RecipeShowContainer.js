@@ -142,7 +142,6 @@ const RecipeShowContainer = props => {
 
   let instructionList
   if (recipe.analyzedInstructions.length > 0) {
-    debugger
     instructionList = recipe.analyzedInstructions[0].steps.map((instructionStep) => {
       return(
         <InstructionTile
@@ -152,6 +151,28 @@ const RecipeShowContainer = props => {
         />
       )
     })
+  }
+
+  const favoriteGame = (event) => {
+    let recipeId = props.match.params.id
+    fetch(`/api/v1/recipes/${recipeId}/favorite_recipes`, {
+      credentials: "same-origin",
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        return response
+      } else {
+        let errorMessage = `${response.status} (${response.statusText})`,
+        error = new Error(errorMessage)
+        throw error
+      }
+    })
+    .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
   return(
@@ -165,7 +186,10 @@ const RecipeShowContainer = props => {
         </div>
 
         <div className="cell small-12 medium-6 recipe-info">
-        <h3>{recipe.title}</h3>
+          <h3>{recipe.title}</h3>
+          <div className='button' onClick={favoriteGame}>
+            ADD TO FAVORITES
+          </div><br /><br />
           <h5><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></h5>
           <h5>Servings: {recipe.servings}</h5>
           <h5>Cooktime: {recipe.readyInMinutes} Minutes</h5>
