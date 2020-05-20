@@ -24,7 +24,7 @@ class Api::V1::RecipesController < ApplicationController
       response = Faraday.get("https://api.spoonacular.com/recipes/#{params[:id]}/information?includeNutrition=false&apiKey=#{ENV["API_KEY"]}")
       parsed_response = JSON.parse(response.body)
 
-      new_recipe = Recipe.create(
+      new_recipe = Recipe.new(
         id: params[:id],
         image: parsed_response["image"],
         title: parsed_response["title"],
@@ -37,6 +37,8 @@ class Api::V1::RecipesController < ApplicationController
         extended_ingredients: parsed_response["extendedIngredients"],
         analyzed_instructions: parsed_response["analyzedInstructions"],
       )
+
+      new_recipe.save
 
       render json: new_recipe
     end
