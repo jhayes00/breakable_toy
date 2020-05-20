@@ -29,16 +29,13 @@ const UserShowContainer = props => {
   if (user.email.length > 0) {
     userFavorites = user.favorite_recipes.map((favorite) => {
       return (
-        <li key={favorite.recipe.id}>
+        <li key={favorite.recipeid}>
           <Link to={`/recipes/${favorite.recipe.id}`}>{favorite.recipe.title}</Link>
         </li>
+
       )
     })
   }
-// debugger
-
-
-
 
   return (
     <div className="grid-container">

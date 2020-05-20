@@ -10,4 +10,9 @@ class Api::V1::FavoriteRecipesController < ApplicationController
       flash.now[:notice] = new_favorite_recipe.errors.full_messages
     end
   end
+
+  def destroy
+    deleted_favorite = User.favorite_recipes.find(params[:id]).delete
+    render json: deleted_review
+  end
 end

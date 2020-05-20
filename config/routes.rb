@@ -8,7 +8,9 @@ Rails.application.routes.draw do
         resources :favorite_recipes, only: [:create, :show]
       end
       resources :ingredients, only: [:show]
-      resources :users, only: [:show]
+      resources :users, only: [:show] do
+        resources :favorite_recipes, only: [:destroy]
+      end
     end
   end
 
