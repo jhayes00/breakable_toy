@@ -19,15 +19,35 @@ const UserShowContainer = props => {
       }
     })
     .then(response => response.json())
-    .then(parsedData => setUser(parsedData))
+    .then(parsedData => {
+      setUser(parsedData)
+    })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
+
+  let userFavorites
+  if (user.email.length > 0) {
+    userFavorites = user.favorite_recipes.map((favorite) => {
+      return (
+        <li key={favorite.recipe.id}>
+          <Link to={`/recipes/${favorite.recipe.id}`}>{favorite.recipe.title}</Link>
+        </li>
+      )
+    })
+  }
+// debugger
+
+
+
 
   return (
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-padding-y">
         <div className="cell auto">
           <h2 className="user-profile">{user.email}</h2>
+          <ul>
+            {userFavorites}
+          </ul>
         </div>
       </div>
     </div>

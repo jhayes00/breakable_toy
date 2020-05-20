@@ -1,5 +1,5 @@
 class FavoriteRecipeSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :recipe, :user
 
   belongs_to :recipe
   belongs_to :user
