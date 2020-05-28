@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 
+import FavoriteRecipeTile from './FavoriteRecipeTile'
+
 const UserShowContainer = props => {
   const [user, setUser] = useState({
     email: "",
@@ -29,13 +31,19 @@ const UserShowContainer = props => {
   if (user.email.length > 0) {
     userFavorites = user.favorite_recipes.map((favorite) => {
       return (
-        <li key={favorite.recipeid}>
-          <Link to={`/recipes/${favorite.recipe.id}`}>{favorite.recipe.title}</Link>
-        </li>
-
+        <FavoriteRecipeTile
+          key={favorite.recipe.id}
+          recipeId={favorite.recipe.id}
+          userId={favorite.user.id}
+          title={favorite.recipe.title}
+        />
       )
     })
   }
+
+  // <li key={favorite.recipeid}>
+  //   <Link to={`/recipes/${favorite.recipe.id}`}>{favorite.recipe.title}</Link>
+  // </li>
 
   return (
     <div className="grid-container">

@@ -153,7 +153,7 @@ const RecipeShowContainer = props => {
     })
   }
 
-  const favoriteGame = (event) => {
+  const favoriteRecipe = (event) => {
     let recipeId = props.match.params.id
     fetch(`/api/v1/recipes/${recipeId}/favorite_recipes`, {
       credentials: "same-origin",
@@ -187,7 +187,7 @@ const RecipeShowContainer = props => {
 
         <div className="cell small-12 medium-6 recipe-info">
           <h3>{recipe.title}</h3>
-          <div className='button' onClick={favoriteGame}>
+          <div className='button' onClick={favoriteRecipe}>
             ADD TO FAVORITES
           </div><br /><br />
           <h5><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></h5>
