@@ -12,7 +12,6 @@ class Api::V1::FavoriteRecipesController < ApplicationController
   end
 
   def destroy
-    binding.pry
     deleted_favorite = current_user.favorite_recipes.find_by(recipe_id: params[:id]).delete
     render json: deleted_favorite
   end

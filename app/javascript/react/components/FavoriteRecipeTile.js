@@ -29,7 +29,7 @@ const FavoriteRecipeTile = props => {
       if (parsedData.errors){
       setErrors(parsedData.errors)
       } else {
-        // props.getGamePageInfo()
+        props.getUserPageInfo()
       }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))

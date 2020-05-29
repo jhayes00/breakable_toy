@@ -6,9 +6,10 @@ import FavoriteRecipeTile from './FavoriteRecipeTile'
 const UserShowContainer = props => {
   const [user, setUser] = useState({
     email: "",
+    favorite_recipes: []
   })
 
-  useEffect(() => {
+  let getUserPageInfo = () => {
     let userId = props.match.params.id
     fetch('/api/v1/users/' + userId)
     .then(response => {
@@ -25,6 +26,9 @@ const UserShowContainer = props => {
       setUser(parsedData)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+  useEffect(() => {
+    getUserPageInfo()
   }, [])
 
   let userFavorites
@@ -36,14 +40,11 @@ const UserShowContainer = props => {
           recipeId={favorite.recipe.id}
           userId={favorite.user.id}
           title={favorite.recipe.title}
+          getUserPageInfo={getUserPageInfo}
         />
       )
     })
   }
-
-  // <li key={favorite.recipeid}>
-  //   <Link to={`/recipes/${favorite.recipe.id}`}>{favorite.recipe.title}</Link>
-  // </li>
 
   return (
     <div className="grid-container">
