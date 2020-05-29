@@ -22,5 +22,5 @@ Rails.application.routes.draw do
   get "/recipes", to: 'homes#index'
   get "/recipes/:id", to: 'homes#index'
   get "/pantry", to: 'homes#index'
-  get "users/:id", to: "homes#index"
+  get "/users/:id", to: "homes#index"
 end

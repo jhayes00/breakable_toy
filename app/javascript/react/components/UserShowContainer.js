@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 
+import FavoriteRecipeTile from './FavoriteRecipeTile'
+
 const UserShowContainer = props => {
   const [user, setUser] = useState({
     email: "",
+    favorite_recipes: []
   })
 
-  useEffect(() => {
+  let getUserPageInfo = () => {
     let userId = props.match.params.id
     fetch('/api/v1/users/' + userId)
     .then(response => {
@@ -23,16 +26,22 @@ const UserShowContainer = props => {
       setUser(parsedData)
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
+  }
+  useEffect(() => {
+    getUserPageInfo()
   }, [])
 
   let userFavorites
   if (user.email.length > 0) {
     userFavorites = user.favorite_recipes.map((favorite) => {
       return (
-        <li key={favorite.recipeid}>
-          <Link to={`/recipes/${favorite.recipe.id}`}>{favorite.recipe.title}</Link>
-        </li>
-
+        <FavoriteRecipeTile
+          key={favorite.recipe.id}
+          recipeId={favorite.recipe.id}
+          userId={favorite.user.id}
+          title={favorite.recipe.title}
+          getUserPageInfo={getUserPageInfo}
+        />
       )
     })
   }
@@ -41,7 +50,7 @@ const UserShowContainer = props => {
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-padding-y">
         <div className="cell auto">
-          <h2 className="user-profile">{user.email}</h2>
+          <h2 className="user-profile">{user.email}'s Favorite Recipes</h2>
           <ul>
             {userFavorites}
           </ul>

@@ -7,6 +7,9 @@ import InstructionTile from './InstructionTile'
 const RecipeShowContainer = props => {
   const [pantryItems, setPantryItems] = useState([]);
   const [selectedIngredient, setSelectedIngredient] = useState()
+  const [favoriteRecipeMessage, setFavoriteRecipeMessage] = useState({
+    message: ""
+  })
 
   const [recipe, setRecipe] = useState({
     id: null,
@@ -153,7 +156,7 @@ const RecipeShowContainer = props => {
     })
   }
 
-  const favoriteGame = (event) => {
+  const favoriteRecipe = (event) => {
     let recipeId = props.match.params.id
     fetch(`/api/v1/recipes/${recipeId}/favorite_recipes`, {
       credentials: "same-origin",
@@ -172,6 +175,10 @@ const RecipeShowContainer = props => {
         throw error
       }
     })
+    .then(response => response.json())
+    .then(favoriteRecipeBody => {
+      setFavoriteRecipeMessage(favoriteRecipeBody)
+    })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }
 
@@ -187,9 +194,10 @@ const RecipeShowContainer = props => {
 
         <div className="cell small-12 medium-6 recipe-info">
           <h3>{recipe.title}</h3>
-          <div className='button' onClick={favoriteGame}>
+          <div className='button' onClick={favoriteRecipe}>
             ADD TO FAVORITES
-          </div><br /><br />
+          </div><br />
+          <h5 className="directions">{favoriteRecipeMessage.message}</h5>
           <h5><a href={recipe.sourceUrl} target="_blank">Original Recipe from {recipe.sourceName}</a></h5>
           <h5>Servings: {recipe.servings}</h5>
           <h5>Cooktime: {recipe.readyInMinutes} Minutes</h5>
