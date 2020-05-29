@@ -40,10 +40,8 @@ const FavoriteRecipeTile = props => {
       <div className='button delete-button cell small-1 text-center' onClick={deleteFavorite}>
         X
       </div>
-      <div className='cell small-8'>
-        <li key={recipeId}>
-          <h3><Link to={`/recipes/${recipeId}`}>{title}</Link></h3>
-        </li>
+      <div className='cell small-8' key={recipeId}>
+        <h3><Link to={`/recipes/${recipeId}`}>{title}</Link></h3>
       </div>
     </div>
   )

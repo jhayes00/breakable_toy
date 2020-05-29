@@ -50,7 +50,7 @@ const UserShowContainer = props => {
     <div className="grid-container">
       <div className="grid-x grid-margin-x grid-padding-y">
         <div className="cell auto">
-          <h2 className="user-profile">{user.email}</h2>
+          <h2 className="user-profile">{user.email}'s Favorite Recipes</h2>
           <ul>
             {userFavorites}
           </ul>
