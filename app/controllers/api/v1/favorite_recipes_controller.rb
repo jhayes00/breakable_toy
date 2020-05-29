@@ -4,11 +4,14 @@ class Api::V1::FavoriteRecipesController < ApplicationController
   def create
     new_favorite_recipe = FavoriteRecipe.new(recipe_id: params["recipe_id"])
     new_favorite_recipe.user = current_user
+
     if new_favorite_recipe.save
-      flash.now[:notice] = "Recipe added to favorites!"
+      favorite_recipe_message = {message: "Recipe added to favorites!"}
     else
-      flash.now[:notice] = new_favorite_recipe.errors.full_messages
+      favorite_recipe_message = {message: new_favorite_recipe.errors.full_messages.to_sentence}
     end
+
+    render json: favorite_recipe_message
   end
 
   def destroy
