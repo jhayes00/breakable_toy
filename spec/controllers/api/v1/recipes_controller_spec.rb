@@ -1,66 +1,67 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::RecipesController, type: :controller do
-  xdescribe "GET#index" do
-    # let!(:pantry_item1) { FactoryBot.create(:pantry_item) }
-    # let!(:pantry_item2) { FactoryBot.create(:pantry_item) }
+  describe "GET#index" do
+    let!(:user1) { FactoryBot.create(:user) }
+    let!(:item1) { Item.create(
+      user: user1,
+      name: 'spaghetti',
+    )}
+    let!(:item2) { Item.create(
+      user: user1,
+      name: 'bacon'
+    )}
+    let!(:item3) { Item.create(
+      user: user1,
+      name: 'eggs'
+    )}
 
     it "returns successful response code and json content" do
+      sign_in user1
       get :index
 
       expect(response.status).to eq 200
       expect(response.content_type).to eq 'application/json'
     end
 
-    it "returns all recipes in the db" do
-      recipe1 = Recipe.create(title: 'Spaghetti and Meatballs')
-      recipe2 = Recipe.create(title: 'Buffalo Chicken Wings')
-
+    it "returns all recipes in the search" do
+      sign_in user1
       get :index
+      num_recipes = 12
+
       api_response = JSON.parse(response.body)
 
-      expect(api_response.length).to eq 2
+      expect(api_response.length).to eq num_recipes
 
-      expect(api_response[0]['title']).to eq recipe1.title
-      expect(api_response[1]['title']).to eq recipe2.title
+      expect(api_response[0]['usedIngredients'].to_s.include?(item1.name)).to eq true
+      expect(api_response[5]['usedIngredients'].to_s.include?(item2.name)).to eq true
+      expect(api_response[11]['usedIngredients'].to_s.include?(item3.name)).to eq true
     end
   end
 
-  xdescribe "POST#create" do
-    let!(:good_game_data) { { game: { name: "Game 1", description: "It's a game", player_num: "4" } } }
-    let!(:bad_game_data) { { game: { name: "Game 2", description: "It's also a game" } } }
+  describe "GET#show" do
+    let!(:user1) { FactoryBot.create(:user) }
+    let!(:recipe1) { FactoryBot.create(:recipe) }
+    let!(:recipe2) { FactoryBot.create(:recipe) }
 
-    it "adds a new game to the db" do
-      before_count = Game.count
-      post :create, params: good_game_data, format: :json
-      after_count = Game.count
+    it "returns successful response code and json content" do
+      sign_in user1
+      get :show, params: { id: recipe1.id }
 
-      expect(after_count).to eq (before_count + 1)
+      expect(response.status).to eq 200
+      expect(response.content_type).to eq 'application/json'
     end
 
-    it "returns the new game as json" do
-      post :create, params: good_game_data, format: :json
+    it "returns correct recipe" do
+      sign_in user1
+      num_attributes = 13
+
+      get :show, params: { id: recipe1.id }
       api_response = JSON.parse(response.body)
 
-      expect(api_response.length).to eq 9
-      expect(api_response["name"]).to eq good_game_data[:game][:name]
-      expect(api_response["description"]).to eq good_game_data[:game][:description]
-      expect(api_response["player_num"]).to eq good_game_data[:game][:player_num]
-    end
+      expect(api_response.length).to eq num_attributes
 
-    it "does not add incomplete/bad info to db" do
-      before_count = Game.count
-      post :create, params: bad_game_data, format: :json
-      after_count = Game.count
-
-      expect(after_count).to eq before_count
-    end
-
-    it "returns validation error json" do
-      post :create, params: bad_game_data, format: :json
-      api_response = JSON.parse(response.body)
-
-      expect(api_response["errors"]).to eq "Player number can't be blank"
+      expect(api_response['title']).to eq recipe1.title
     end
   end
 end
