@@ -3,5 +3,5 @@ class Ingredient < ApplicationRecord
   has_many :items
   has_many :users, through: :items
 
-  validates :name, null: false
+  validates :name, presence: true
 end

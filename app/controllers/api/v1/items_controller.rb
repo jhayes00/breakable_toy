@@ -6,10 +6,6 @@ class Api::V1::ItemsController < ApplicationController
     render json: current_user.items
   end
 
-  def show
-    render json: current_user.items.find(params[:id])
-  end
-
   def create
     new_item = Item.new(item_params)
     new_item.user = current_user
