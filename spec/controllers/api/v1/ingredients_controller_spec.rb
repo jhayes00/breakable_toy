@@ -18,7 +18,7 @@ RSpec.describe Api::V1::IngredientsController, type: :controller do
 
     it "returns correct ingredient" do
       sign_in user1
-      num_attributes = 4
+      num_attributes = 3
 
       get :show, params: { id: ingredient1.name }
       api_response = JSON.parse(response.body)

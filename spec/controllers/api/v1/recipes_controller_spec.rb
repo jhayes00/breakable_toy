@@ -27,7 +27,7 @@ RSpec.describe Api::V1::RecipesController, type: :controller do
     it "returns all recipes in the search" do
       sign_in user1
       get :index
-      num_recipes = 12
+      num_recipes = 3
 
       api_response = JSON.parse(response.body)
 
