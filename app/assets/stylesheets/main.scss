@@ -12,6 +12,7 @@ h3 {
   a {
     color: $blue;
     font-family: "Cabin Sketch";
+    font-size: 36px;
   }
 }
 
@@ -57,6 +58,16 @@ h4 {
   background-size: 20rem;
   background-position: top right;
   background-repeat: no-repeat;
+}
+
+@media (max-width: 992px) {
+  .light-gray-background {
+    background-image: none;
+  }
+
+  .top-bar {
+    font-size: 18px;
+  }
 }
 
 .recipe-tile {
