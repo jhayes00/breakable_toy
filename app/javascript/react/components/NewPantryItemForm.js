@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import _ from 'lodash'
+import React, { useState } from 'react'
 
 import ErrorList from './ErrorList'
 
-const NewPantryItemForm = props => {
-  const [newPantryItem, setNewPantryItem] = useState({})
+const NewPantryItemForm = ({getPantry, selectedItem}) => {
   const [errors, setErrors] = useState({})
   const [formVals, setFormVals] = useState({
     name: "",
@@ -30,7 +28,7 @@ const NewPantryItemForm = props => {
       }
     })
     setErrors(newErrors)
-    return _.isEmpty(newErrors)
+    return Object.keys(newErrors).length === 0
   }
 
   const handleSubmit = event => {
@@ -59,7 +57,7 @@ const NewPantryItemForm = props => {
         if (parsedData.errors){
         setErrors(parsedData.errors)
       }
-        props.updatePantry()
+        getPantry()
         setFormVals({
           name: "",
           quantity: ""
@@ -71,8 +69,8 @@ const NewPantryItemForm = props => {
 
   const handleEdit = event => {
     event.preventDefault()
-    if (props.selectedItem !== undefined) {
-      fetch(`/api/v1/items/${props.selectedItem}`, {
+    if (selectedItem) {
+      fetch(`/api/v1/items/${selectedItem}`, {
         credentials: "same-origin",
         method: "PATCH",
         body: JSON.stringify(formVals),
@@ -95,19 +93,12 @@ const NewPantryItemForm = props => {
         if (parsedData.errors){
         setErrors(parsedData.errors)
         } else {
-          props.updatePantry()
+          getPantry()
         }
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
     }
   }
-
-  let editButton = "button"
-  if (props.selectedItem == undefined) {
-    editButton = "button inactive-button"
-  }
-
-  let submitButton = "button"
 
   return(
     <form onSubmit={handleSubmit}>
@@ -136,8 +127,10 @@ const NewPantryItemForm = props => {
         value={formVals.quantity}
       />
 
-      <input className={submitButton} type="submit" />
-      <div className={editButton} onClick={handleEdit}>Update Selected</div>
+      <input className={"button"} type="submit" />
+      <button className={selectedItem ? "button" : "button inactive-button"} onClick={handleEdit}>
+        Update Selected
+      </button>
     </form>
   )
 }

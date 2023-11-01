@@ -4,15 +4,11 @@ import { Link } from 'react-router-dom'
 import PantryItemTile from './PantryItemTile'
 import NewPantryItemForm from './NewPantryItemForm'
 
-const PantryIndexContainer = props => {
+const PantryIndexContainer = () => {
   const [pantryItems, setPantryItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [updateItem, setUpdateItem] = useState({
-    name: "",
-    quantity: ""
-  })
 
-  let updatePantry = () => {
+  let getPantry = () => {
     fetch("/api/v1/items.json")
     .then(response => {
       if (response.ok) {
@@ -31,34 +27,16 @@ const PantryIndexContainer = props => {
   }
 
   useEffect(() => {
-    updatePantry()
+    getPantry()
   }, [])
 
   const onChangeCheckbox = event => {
     if (selectedItems.includes(event.currentTarget.id)) {
       setSelectedItems(selectedItems.filter(id => id !== event.currentTarget.id));
-      setUpdateItem({
-        name: ""
-      });
     } else {
       setSelectedItems([...selectedItems, event.currentTarget.id])
-      setUpdateItem({
-        name: event.currentTarget.value
-      });
     }
   }
-
-  let pantryItemTiles = pantryItems.map((item) => {
-    return(
-      <PantryItemTile
-        key={item.id}
-        id={item.id}
-        name={item.name}
-        quantity={item.quantity}
-        onChangeCheckbox={onChangeCheckbox}
-      />
-    )
-  })
 
   const handleDelete = event => {
     event.preventDefault()
@@ -85,44 +63,42 @@ const PantryIndexContainer = props => {
         if (parsedData.errors){
         setErrors(parsedData.errors)
         } else {
-          updatePantry()
+          getPantry()
         }
       })
       .catch(error => console.error(`Error in fetch: ${error.message}`))
     })
   }
 
-  let selectedItem
-  if (selectedItems.length == 1) {
-    selectedItem = selectedItems[0]
-  }
-
-  let deleteButton = "button"
-  if (selectedItems.length == 0) {
-    deleteButton = "button inactive-button"
-  }
-
   return(
     <div className="grid-container pantry-container">
       <div className="grid-x grid-margin-x grid-padding-x grid-padding-y">
         <div className="cell small-12 medium-6">
-          <h3><Link to='/recipes'>
-            Search Recipes
-          </Link></h3>
+          <h3>
+            <Link to='/recipes'>
+              Search Recipes
+            </Link>
+          </h3>
 
           <NewPantryItemForm
-            updatePantry={updatePantry}
-            selectedItem={selectedItem}
-            updateItem={updateItem}
+            getPantry={getPantry}
+            selectedItem={selectedItems.length == 1 ? selectedItems[0] : undefined}
           />
         </div>
 
         <div className="cell small-12 medium-5 pantry">
           <h3>Current Pantry</h3>
           <ul>
-            {pantryItemTiles}
+            {pantryItems.map((item) => 
+              <PantryItemTile
+                item={item}
+                onChangeCheckbox={onChangeCheckbox}
+              />
+          )}
           </ul>
-          <div className={deleteButton} onClick={handleDelete}>Delete Selected</div>
+          <button className={selectedItems.length == 0 ? "button inactive-button" : "button"} onClick={handleDelete}>
+            Delete Selected
+          </button>
         </div>
       </div>
     </div>
