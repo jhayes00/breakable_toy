@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 
 import IngredientTile from './IngredientTile'
 import InstructionTile from './InstructionTile'
@@ -57,6 +56,8 @@ const RecipeShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
+  // Consider removing this and making all ingredients clickable to improve 
+  // performance and possibly UX.
   useEffect(() => {
     fetch("/api/v1/items.json")
     .then(response => {
@@ -104,59 +105,7 @@ const RecipeShowContainer = props => {
     }
   }
 
-  let selected
-  let handleClick
-  let isInPantry
-  let ingredientList = recipe.extendedIngredients.map((ingredient) => {
-    if (pantryItems.includes(ingredient.name)) {
-      isInPantry = true
-    } else {
-      isInPantry = false
-    }
-
-    selected = false
-    if (selectedIngredient == ingredient.name) {
-      selected = true
-    }
-
-    handleClick = () => {
-      setAltIngredients({
-        status: "",
-        ingredient: "",
-        substitutes: [],
-        message: ""
-      });
-
-      toggleIngredientSelect(ingredient)
-    }
-
-    return(
-      <IngredientTile
-        key={ingredient.id}
-        name={ingredient.name}
-        measuredName={ingredient.original}
-        selected={selected}
-        handleClick={handleClick}
-        altIngredients={altIngredients}
-        isInPantry={isInPantry}
-      />
-    )
-  })
-
-  let instructionList
-  if (recipe.analyzedInstructions.length > 0) {
-    instructionList = recipe.analyzedInstructions[0].steps.map((instructionStep) => {
-      return(
-        <InstructionTile
-          key={instructionStep.id}
-          number={instructionStep.number}
-          step={instructionStep.step}
-        />
-      )
-    })
-  }
-
-  const favoriteRecipe = (event) => {
+  const favoriteRecipe = () => {
     let recipeId = props.match.params.id
     fetch(`/api/v1/recipes/${recipeId}/favorite_recipes`, {
       credentials: "same-origin",
@@ -209,13 +158,36 @@ const RecipeShowContainer = props => {
           <h4>Ingredients</h4>
           <h5 className="directions">Missing ingredients are blue, click for substitutes.</h5>
           <ul>
-            {ingredientList}
+            {recipe.extendedIngredients.map(ingredient => (
+              <IngredientTile
+                key={ingredient.id}
+                measuredName={ingredient.original}
+                isSelected={selectedIngredient == ingredient.name}
+                handleClick={() => {
+                  setAltIngredients({
+                    status: "",
+                    ingredient: "",
+                    substitutes: [],
+                    message: ""
+                  });
+                  toggleIngredientSelect(ingredient)
+                }}
+                altIngredients={altIngredients}
+                isInPantry={pantryItems.includes(ingredient.name)}
+              />
+            ))}
           </ul>
         </div>
 
         <div className="cell small-12 medium-6 instructions">
           <h4>Instructions</h4>
-          {instructionList}
+            {recipe?.analyzedInstructions[0]?.steps.map((instructionStep) => (
+              <InstructionTile
+                key={instructionStep.id}
+                number={instructionStep.number}
+                step={instructionStep.step}
+              />
+            ))}
         </div>
       </div>
     </div>
