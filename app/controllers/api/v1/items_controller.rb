@@ -20,10 +20,6 @@ class Api::V1::ItemsController < ApplicationController
     end
   end
 
-  def edit
-    render json: Item.find(params[:id])
-  end
-
   def update
     updated_item = Item.find(params[:id])
     if updated_item.update(item_params)

@@ -1,13 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
-const FavoriteRecipeTile = props => {
-  const recipeId = props.recipeId
-  const userId = props.userId
-  const title = props.title
-
-  const deleteFavorite = (event) => {
-    fetch(`/api/v1/users/${userId}/favorite_recipes/${recipeId}`, {
+const FavoriteRecipeTile = ({recipe, userId, getUserPageInfo}) => {
+  const deleteFavorite = () => {
+    fetch(`/api/v1/users/${userId}/favorite_recipes/${recipe.id}`, {
       credentials: "same-origin",
       method: "DELETE",
       headers: {
@@ -29,7 +25,7 @@ const FavoriteRecipeTile = props => {
       if (parsedData.errors){
       setErrors(parsedData.errors)
       } else {
-        props.getUserPageInfo()
+        getUserPageInfo()
       }
     })
     .catch(error => console.error(`Error in fetch: ${error.message}`))
@@ -40,8 +36,8 @@ const FavoriteRecipeTile = props => {
       <div className='button delete-button cell small-1 text-center' onClick={deleteFavorite}>
         X
       </div>
-      <div className='cell small-8' key={recipeId}>
-        <h3><Link to={`/recipes/${recipeId}`}>{title}</Link></h3>
+      <div className='cell small-8' key={recipe.id}>
+        <h3><Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link></h3>
       </div>
     </div>
   )

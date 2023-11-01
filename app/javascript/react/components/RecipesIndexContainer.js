@@ -23,28 +23,25 @@ const RecipesIndexContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  let sorted_recipes = recipes.sort(function(a,b) {
+  let sortedRecipes = recipes.sort(function(a,b) {
     return a.missedIngredientCount - b.missedIngredientCount
-  })
-
-  let recipeTiles = sorted_recipes.map((recipe) => {
-    return(
-      <RecipeTile
-        key={recipe.id}
-        id={recipe.id}
-        title={recipe.title}
-        image={recipe.image}
-        numLikes={recipe.likes}
-        numMissedIngredients={recipe.missedIngredientCount}
-        missedIngredients={recipe.missedIngredients}
-      />
-    )
   })
 
   return(
     <div className='grid-container'>
       <div className='grid-x grid-margin-x grid-padding-y grid-padding-x'>
-        {recipeTiles}
+        {sortedRecipes.map((recipe) => 
+          <RecipeTile
+            key={recipe.id}
+            id={recipe.id}
+            title={recipe.title}
+            image={recipe.image}
+            numLikes={recipe.likes}
+            numMissedIngredients={recipe.missedIngredientCount}
+            missedIngredients={recipe.missedIngredients}
+          />
+        
+      )}
       </div>
     </div>
   )
