@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 
 import RecipeTile from './RecipeTile'
 
-const RecipesIndexContainer = props => {
+const RecipesIndexContainer = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -41,7 +41,6 @@ const RecipesIndexContainer = props => {
             numMissedIngredients={recipe.missedIngredientCount}
             missedIngredients={recipe.missedIngredients}
           />
-        
       )}
       </div>
     </div>

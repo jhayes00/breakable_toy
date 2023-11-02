@@ -97,8 +97,6 @@ const NewPantryItemForm = ({getPantry, selectedItem}) => {
         if (parsedData.errors){
         setErrors(parsedData.errors)
         } else {
-          // Consider using SWR to invalidate cache throughout app
-          // to avoid explicitly refetching data.
           getPantry()
         }
       })
