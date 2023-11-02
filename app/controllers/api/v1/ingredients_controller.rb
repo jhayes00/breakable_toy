@@ -5,7 +5,7 @@ class Api::V1::IngredientsController < ApplicationController
     substitutes_query = params[:id].gsub(' ', '+')
     response = Faraday.get("https://api.spoonacular.com/food/ingredients/substitutes?ingredientName=#{substitutes_query}&apiKey=#{ENV["API_KEY"]}")
     parsed_response = JSON.parse(response.body)
-
+    # Add error handling
     render json: parsed_response
   end
 end

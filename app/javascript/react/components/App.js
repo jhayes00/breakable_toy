@@ -1,12 +1,12 @@
 import React from 'react'
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import RecipesIndexContainer from './RecipesIndexContainer'
 import RecipeShowContainer from './RecipeShowContainer'
 import PantryIndexContainer from './PantryIndexContainer'
 import UserShowContainer from './UserShowContainer'
 
-export const App = (props) => {
+export const App = () => {
   return (
     <BrowserRouter>
       <Switch>

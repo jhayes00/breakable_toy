@@ -3,6 +3,7 @@ class Api::V1::ItemsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    # Add error handling
     render json: current_user.items
   end
 
@@ -13,9 +14,7 @@ class Api::V1::ItemsController < ApplicationController
       render json: new_item
     else
       errors_array = new_item.errors.full_messages
-      formatted_errors = errors_array.each { |error|
-
-      }
+      formatted_errors = errors_array.each { |error| }
       render json: { errors: formatted_errors.to_sentence }, status: :unprocessable_entity
     end
   end
@@ -31,6 +30,7 @@ class Api::V1::ItemsController < ApplicationController
 
   def destroy
     deleted_item = Item.find(params[:id]).delete
+    # Add error handling
     render json: deleted_item
   end
 

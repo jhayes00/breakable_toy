@@ -4,6 +4,8 @@ import ErrorList from './ErrorList'
 
 const NewPantryItemForm = ({getPantry, selectedItem}) => {
   const [errors, setErrors] = useState({})
+  // Consider making selectedItem a formVal object and 
+  // preopulating the inputs for to improve the update UX.
   const [formVals, setFormVals] = useState({
     name: "",
     quantity: ""
@@ -16,6 +18,8 @@ const NewPantryItemForm = ({getPantry, selectedItem}) => {
     })
   }
 
+  // Consider adding some stricter validation here and/or using
+  // react-hook-form or formik handling form state/validation.
   const validateForm = () => {
     let newErrors = {}
     const requiredFields = ["name"]
@@ -93,6 +97,8 @@ const NewPantryItemForm = ({getPantry, selectedItem}) => {
         if (parsedData.errors){
         setErrors(parsedData.errors)
         } else {
+          // Consider using SWR to invalidate cache throughout app
+          // to avoid explicitly refetching data.
           getPantry()
         }
       })

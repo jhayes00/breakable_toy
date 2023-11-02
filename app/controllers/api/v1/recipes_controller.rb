@@ -2,6 +2,7 @@ class Api::V1::RecipesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    # Build ingredients query string
     pantry_items_query = ""
     pantry_items = current_user.items
     pantry_items.each do |item|
@@ -14,10 +15,12 @@ class Api::V1::RecipesController < ApplicationController
 
     response = Faraday.get("https://api.spoonacular.com/recipes/findByIngredients?ingredients=#{pantry_items_query}&number=12&ranking=1&apiKey=#{ENV["API_KEY"]}")
     parsed_response = JSON.parse(response.body)
+    # Add error handling
     render json: parsed_response
   end
 
   def show
+    # Future proofing in case we decide to store recipes, this can be removed.
     if Recipe.any? {|recipe| recipe[:id] == params[:id].to_i}
       render json: Recipe.find(params[:id])
     else
@@ -39,7 +42,7 @@ class Api::V1::RecipesController < ApplicationController
       )
 
       new_recipe.save
-
+      # Add error handling
       render json: new_recipe
     end
   end

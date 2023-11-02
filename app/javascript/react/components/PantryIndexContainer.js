@@ -8,6 +8,7 @@ const PantryIndexContainer = () => {
   const [pantryItems, setPantryItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
 
+  // Consider creating abstractions for API queries & mutations
   let getPantry = () => {
     fetch("/api/v1/items.json")
     .then(response => {
@@ -71,6 +72,7 @@ const PantryIndexContainer = () => {
   }
 
   return(
+    // Consider using styled components instead of stylesheets
     <div className="grid-container pantry-container">
       <div className="grid-x grid-margin-x grid-padding-x grid-padding-y">
         <div className="cell small-12 medium-6">
