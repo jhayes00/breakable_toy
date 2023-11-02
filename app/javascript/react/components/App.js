@@ -6,6 +6,7 @@ import RecipeShowContainer from './RecipeShowContainer'
 import PantryIndexContainer from './PantryIndexContainer'
 import UserShowContainer from './UserShowContainer'
 
+// Add tests (unit, cypress, controller)
 export const App = () => {
   return (
     <BrowserRouter>

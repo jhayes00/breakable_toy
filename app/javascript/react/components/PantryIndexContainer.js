@@ -8,7 +8,7 @@ const PantryIndexContainer = () => {
   const [pantryItems, setPantryItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
 
-  // Consider creating abstractions for API queries & mutations
+  // Consider creating custom hooks for API queries & mutations
   let getPantry = () => {
     fetch("/api/v1/items.json")
     .then(response => {
@@ -64,6 +64,8 @@ const PantryIndexContainer = () => {
         if (parsedData.errors){
         setErrors(parsedData.errors)
         } else {
+          // Consider using SWR to invalidate cache throughout app
+          // to avoid explicitly refetching data.
           getPantry()
         }
       })
