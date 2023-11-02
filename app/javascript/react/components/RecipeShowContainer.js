@@ -56,8 +56,9 @@ const RecipeShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
-  // Consider removing this and making all ingredients clickable to improve 
-  // performance and possibly UX.
+  // Consider removing this fetch and associated missing ingredient logic
+  // to improve performance. Alternatively pantry items could be stored
+  // in context or passed as props.
   useEffect(() => {
     fetch("/api/v1/items.json")
     .then(response => {
@@ -81,6 +82,7 @@ const RecipeShowContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
+  // Caching this data would improve performance for repeated clicks.
   const toggleIngredientSelect = (ingredient) => {
     if(ingredient.name == selectedIngredient) {
       setSelectedIngredient(null)

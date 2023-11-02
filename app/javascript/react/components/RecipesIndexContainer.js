@@ -23,6 +23,7 @@ const RecipesIndexContainer = props => {
     .catch(error => console.error(`Error in fetch: ${error.message}`))
   }, [])
 
+  // Consider returning sorted recipes from controller.
   let sortedRecipes = recipes.sort(function(a,b) {
     return a.missedIngredientCount - b.missedIngredientCount
   })

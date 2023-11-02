@@ -11,11 +11,13 @@ class Api::V1::FavoriteRecipesController < ApplicationController
       favorite_recipe_message = {message: new_favorite_recipe.errors.full_messages.to_sentence}
     end
 
+    # Add error handling
     render json: favorite_recipe_message
   end
 
   def destroy
     deleted_favorite = current_user.favorite_recipes.find_by(recipe_id: params[:id]).delete
+    # Add error handling
     render json: deleted_favorite
   end
 end
